@@ -123,6 +123,7 @@ tasks.withType(JavaExec::class.java) {
 }
 
 assetManagement {
+	automaticUpdate = true
 	modAssets("beginner") {
 		item("guidite_sword") {
 			parent {
@@ -130,6 +131,10 @@ assetManagement {
 			}
 		}
 		item("suspicious_substance") {
+			defaultParent()
+		}
+
+		item("poisonous_apple") {
 			defaultParent()
 		}
 	}

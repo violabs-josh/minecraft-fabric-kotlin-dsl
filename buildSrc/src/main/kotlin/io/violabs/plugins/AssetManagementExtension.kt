@@ -1,14 +1,20 @@
 package io.violabs.plugins
 
-open class AssetManagementExtension {
-    private var assets: ModAssets? = null
+import org.gradle.api.model.ObjectFactory
+import org.gradle.api.provider.Property
+import javax.inject.Inject
 
-    fun assets(): ModAssets? = assets
+open class AssetManagementExtension @Inject constructor(objects: ObjectFactory) {
+    private var assets: Property<ModAssets> = objects.property(ModAssets::class.java)
+    var automaticUpdate: Boolean = true
+    var assetPath: String? = null
+
+    fun assets(): ModAssets? = assets.orNull
 
     fun modAssets(name: String, config: ModAssets.() -> Unit = {}): ModAssets {
         val mod = ModAssets(name)
         mod.apply(config)
-        assets = mod
+        assets.set(mod)
         return mod
     }
 }

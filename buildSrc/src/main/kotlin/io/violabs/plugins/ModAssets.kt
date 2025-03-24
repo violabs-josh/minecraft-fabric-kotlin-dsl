@@ -1,7 +1,7 @@
 package io.violabs.plugins
 
 class ModAssets(
-	private val modName: String
+	val modName: String
 ) {
 	private val items: MutableList<Item> = mutableListOf()
 
@@ -22,7 +22,7 @@ class ModAssets(
 	}
 
 	inner class Item(
-		private var itemName: String,
+		var itemName: String,
 		private var metadata: Metadata = Metadata.Model(),
 		private var parent: Metadata? = null
 	) {
@@ -43,7 +43,7 @@ class ModAssets(
 		fun toItemDetailsJson(): String = """
 		|{
 		|  "model": {
-		|    "type": "${metadata.type}"
+		|    "type": "${metadata.type}",
 		|    "model": "$modName:item/$itemName"
 		|  }
 		|}
